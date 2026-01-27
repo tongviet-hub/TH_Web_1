@@ -1,178 +1,143 @@
-import React, { useState } from 'react';
-import { PageContainer } from '@ant-design/pro-layout';
-import { Table, Button, Input, Modal, Form, InputNumber, Popconfirm, message, Space, Card } from 'antd';
-import { PlusOutlined, DeleteOutlined, SearchOutlined, EditOutlined } from '@ant-design/icons';
+import rules from '@/utils/rules';
+import { PlusOutlined } from '@ant-design/icons';
+import { Popconfirm, Table, message, Button, Modal, Form, Input, Checkbox, InputNumber } from 'antd';
+import { useState } from 'react';
 import { useModel } from 'umi';
 
-const QuanLySanPham = () => {
+const BaiTap01 = () => {
+  const [bienThamChieuForm] = Form.useForm();
   const { danhSachSanPham, setDanhSachSanPham } = useModel('sanpham');
-  const [searchText, setSearchText] = useState('');
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [form] = Form.useForm();
+  const [open, setOpen] = useState(false);
   const [sanPhamDangSua, setSanPhamDangSua] = useState({
     name: '',
-    price: 0,
     quantity: 0,
-    id: 999999,
+    price: 0,
+    id: 99999,
   });
-
-
-  // Filter data based on search text
-  const filteredData = danhSachSanPham.filter((item: any) =>
-    item.name.toLowerCase().includes(searchText.toLowerCase())
-  );
-
-  const handleAddProduct = (values: any) => {
-    const newId = danhSachSanPham.length > 0 ? Math.max(...danhSachSanPham.map((item: any) => item.id)) + 1 : 1;
-    const newProduct = {
-      id: newId,
-      ...values,
-    };
-    setDanhSachSanPham([...danhSachSanPham, newProduct]);
-    message.success('Thêm sản phẩm thành công');
-    setIsModalVisible(false);
-    form.resetFields();
-  };
-
-  const handleDeleteProduct = (id: number) => {
-    const newData = danhSachSanPham.filter((item: any) => item.id !== id);
-    setDanhSachSanPham(newData);
-    message.success('Xóa sản phẩm thành công');
-  };
-
-  const handleEditProduct = (record: any) => {
-    setSanPhamDangSua(record);
-    setIsModalVisible(true);
-    form.setFieldsValue(record);
-  };
-
-
-  const columns = [
+  const cot = [
     {
       title: 'STT',
-      key: 'index',
-      width: 80,
-      render: (_: any, __: any, index: number) => index + 1,
+      dataIndex: 'id',
+      width: 200,
     },
     {
       title: 'Tên sản phẩm',
       dataIndex: 'name',
-      key: 'name',
+      width: 200,
+      render: (value, record) => {
+        console.log('value', value);
+        console.log('record', record);
+        return <b style={{ color: 'red' }}>{record.name}</b>;
+      },
     },
     {
-      title: 'Giá',
+      title: 'Giá sản phẩm',
       dataIndex: 'price',
-      key: 'price',
-      render: (text: number) => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(text),
+      width: 200,
     },
     {
-      title: 'Số lượng',
+      title: 'Số lượng sản phẩm',
       dataIndex: 'quantity',
-      key: 'quantity',
+      width: 200,
     },
     {
       title: 'Thao tác',
-      key: 'action',
-      width: 150,
-      render: (_: any, record: any) => (
-        <Space size="middle">
+      width: 200,
+      align: 'center',
+      render: (value, record) => (
+        <>
           <Popconfirm
-            title="Bạn có chắc chắn muốn xóa sản phẩm này?"
-            onConfirm={() => handleDeleteProduct(record.id)}
-            okText="Có"
-            cancelText="Không"
+            title='Bạn có chắc chắn muốn xóa sản phẩm này không?'
+            onConfirm={() => {
+              const danhSachSanPhamMoi = danhSachSanPham.filter((item) => item.id !== record.id);
+              setDanhSachSanPham(danhSachSanPhamMoi);
+              // alert('Xóa sản phẩm thành công!');
+              message.info('Xóa sản phẩm thành công!');
+            }}
+            // onCancel={cancel}
+            okText='Có'
+            cancelText='Không'
           >
-            <Button type="primary" danger icon={<DeleteOutlined />}>
-              Xóa
-            </Button>
-            <Button type="primary" icon={<EditOutlined />} onClick={() => handleEditProduct(record)}>
-              Sửa
-            </Button>
+            <a href='#'>Xóa</a>
           </Popconfirm>
-        </Space>
+          <a
+            onClick={() => {
+              setOpen(true);
+              setSanPhamDangSua(record);
+              bienThamChieuForm.setFieldsValue(record);
+            }}
+            style={{ marginLeft: 8 }}
+            href='#'
+          >
+            Sửa
+          </a>
+        </>
       ),
     },
   ];
 
   return (
-    <PageContainer title="Quản lý sản phẩm">
-      <Card>
-        <Space style={{ marginBottom: 16, justifyContent: 'space-between', width: '100%' }}>
-          <Input.Search
-            placeholder="Tìm kiếm sản phẩm..."
-            allowClear
-            enterButton={<SearchOutlined />}
-            onSearch={(value) => setSearchText(value)}
-            onChange={(e) => setSearchText(e.target.value)}
-            style={{ width: 300 }}
-          />
-          <Button type="primary" icon={<PlusOutlined />} onClick={() => setIsModalVisible(true)}>
-            Thêm sản phẩm
-          </Button>
-        </Space>
-
-        <Table
-          columns={columns}
-          dataSource={filteredData}
-          rowKey="id"
-          pagination={{ pageSize: 5 }}
-        />
-
-        <Modal
-          title="Thêm sản phẩm mới"
-          visible={isModalVisible}
-          onCancel={() => {
-            setIsModalVisible(false);
-            form.resetFields();
+    <>
+      <h1>Quản lý sản phẩm</h1>
+      <Button
+        onClick={() => {
+          setOpen(true);
+        }}
+        style={{
+          marginBottom: 8,
+        }}
+        type='primary'
+        icon={<PlusOutlined />}
+      >
+        Thêm sản phẩm mới
+      </Button>
+      <Table columns={cot} dataSource={danhSachSanPham} />
+      <Modal
+        footer={false}
+        title='Basic Modal'
+        visible={open}
+        //  onOk={handleOk}
+        onCancel={() => {
+          setOpen(false);
+        }}
+      >
+        <Form
+          form={bienThamChieuForm}
+          onFinish={(values) => {
+            setDanhSachSanPham([...danhSachSanPham, { ...values, id: danhSachSanPham.length + 1 }]);
+            setOpen(false);
+            message.success('Thêm sản phẩm thành công');
           }}
-          onOk={() => form.submit()}
-          destroyOnClose
+          name='basic'
+          labelCol={{ span: 8 }}
+          wrapperCol={{ span: 16 }}
+          autoComplete='off'
         >
-          <Form
-            form={form}
-            layout="vertical"
-            onFinish={handleAddProduct}
-
+          <Form.Item
+            initialValue={sanPhamDangSua.name}
+            label='Tên sản phẩm'
+            name='name'
+            rules={[{ required: true, message: 'Please input your username!' }]}
           >
-            <Form.Item
-              name="name"
-              label="Tên sản phẩm"
-              rules={[{ required: true, message: 'Vui lòng nhập tên sản phẩm!' }]}
-            >
-              <Input placeholder="Nhập tên sản phẩm" />
-            </Form.Item>
+            <Input />
+          </Form.Item>
 
-            <Form.Item
-              name="price"
-              label="Giá"
-              rules={[
-                { required: true, message: 'Vui lòng nhập giá!' },
-                { type: 'number', min: 1, message: 'Giá phải là số dương!' },
-              ]}
-            >
-              <InputNumber
-                style={{ width: '100%' }}
-                formatter={value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                parser={value => value!.replace(/\$\s?|(,*)/g, '')}
-                placeholder="Nhập giá sản phẩm"
-              />
-            </Form.Item>
+          <Form.Item label='Giá' name='price' rules={[...rules.number(9999999999, 0)]}>
+            <InputNumber />
+          </Form.Item>
 
-            <Form.Item
-              name="quantity"
-              label="Số lượng"
-              rules={[
-                { required: true, message: 'Vui lòng nhập số lượng!' },
-                { type: 'number', min: 1, message: 'Số lượng phải là số nguyên dương!' }, // "dương" usually implies > 0.
-              ]}
-            >
-              <InputNumber style={{ width: '100%' }} placeholder="Nhập số lượng" precision={0} />
-            </Form.Item>
-          </Form>
-        </Modal>
-      </Card>
-    </PageContainer>
+          <Form.Item rules={[...rules.number(9999999999, 0, false)]} name='quantity' label='Số lượng'>
+            <InputNumber />
+          </Form.Item>
+
+          <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+            <Button type='primary' htmlType='submit'>
+              Submit
+            </Button>
+          </Form.Item>
+        </Form>
+      </Modal>
+    </>
   );
 };
-
-export default QuanLySanPham;
+export default BaiTap01;
