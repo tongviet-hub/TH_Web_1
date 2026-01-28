@@ -48,6 +48,12 @@
 		icon: 'TableOutlined',
 		component: './QuanLySanPham',
 	},
+	{
+		path: '/quan-ly-don-hang',
+		name: 'Quản lý đơn hàng',
+		icon: 'TableOutlined',
+		component: './QuanLyDonHang',
+	},
 
 	// DANH MUC HE THONG
 	// {

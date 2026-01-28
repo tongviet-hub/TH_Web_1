@@ -1,143 +1,293 @@
-import rules from '@/utils/rules';
-import { PlusOutlined } from '@ant-design/icons';
-import { Popconfirm, Table, message, Button, Modal, Form, Input, Checkbox, InputNumber } from 'antd';
-import { useState } from 'react';
+import { PlusOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons';
+import { Popconfirm, Table, message, Button, Modal, Form, Input, InputNumber, Select, Tag, Space, Card, Slider, Row, Col, Statistic } from 'antd';
+import { useState, useMemo } from 'react';
 import { useModel } from 'umi';
 
+const CATEGORIES = ['Laptop', 'Điện thoại', 'Máy tính bảng', 'Phụ kiện'];
+
+import { ReloadOutlined } from '@ant-design/icons';
+
 const BaiTap01 = () => {
-  const [bienThamChieuForm] = Form.useForm();
+  const [form] = Form.useForm();
   const { danhSachSanPham, setDanhSachSanPham } = useModel('sanpham');
   const [open, setOpen] = useState(false);
-  const [sanPhamDangSua, setSanPhamDangSua] = useState({
-    name: '',
-    quantity: 0,
-    price: 0,
-    id: 99999,
-  });
-  const cot = [
+  const [isEditing, setIsEditing] = useState(false);
+  const [editingId, setEditingId] = useState<number | null>(null);
+
+  const handleResetData = () => {
+    localStorage.removeItem('danhSachSanPham');
+    window.location.reload();
+  };
+
+  const [searchText, setSearchText] = useState('');
+  const [filterCategory, setFilterCategory] = useState<string | undefined>(undefined);
+  const [filterStatus, setFilterStatus] = useState<string | undefined>(undefined);
+  const [priceRange, setPriceRange] = useState<[number, number]>([0, 100000000]);
+
+  const filteredData = useMemo(() => {
+    return danhSachSanPham.filter((item: any) => {
+      const matchName = (item.name || '').toLowerCase().includes(searchText.toLowerCase());
+      const matchCategory = filterCategory ? item.category === filterCategory : true;
+      const matchPrice = item.price >= priceRange[0] && item.price <= priceRange[1];
+
+      let status = 'Còn hàng';
+      if (item.quantity === 0) status = 'Hết hàng';
+      else if (item.quantity <= 10) status = 'Sắp hết';
+
+      const matchStatus = filterStatus ? status === filterStatus : true;
+
+      return matchName && matchCategory && matchPrice && matchStatus;
+    });
+  }, [danhSachSanPham, searchText, filterCategory, filterStatus, priceRange]);
+
+  const stats = useMemo(() => {
+    const totalProducts = danhSachSanPham.length;
+    const totalStockValue = danhSachSanPham.reduce((sum: number, item: any) => sum + (item.price * item.quantity), 0);
+    return { totalProducts, totalStockValue };
+  }, [danhSachSanPham]);
+
+  const handleEdit = (record: any) => {
+    setIsEditing(true);
+    setEditingId(record.id);
+    form.setFieldsValue(record);
+    setOpen(true);
+  };
+
+  const handleDelete = (id: number) => {
+    const newData = danhSachSanPham.filter((item: any) => item.id !== id);
+    setDanhSachSanPham(newData);
+    message.success('Xóa sản phẩm thành công!');
+  };
+
+  const handleSave = (values: any) => {
+    if (isEditing && editingId !== null) {
+      const newData = danhSachSanPham.map((item: any) =>
+        item.id === editingId ? { ...item, ...values } : item
+      );
+      setDanhSachSanPham(newData);
+      message.success('Cập nhật sản phẩm thành công');
+    } else {
+      const newId = danhSachSanPham.length > 0 ? Math.max(...danhSachSanPham.map((i: any) => i.id)) + 1 : 1;
+      setDanhSachSanPham([...danhSachSanPham, { ...values, id: newId }]);
+      message.success('Thêm sản phẩm thành công');
+    }
+    setOpen(false);
+    form.resetFields();
+  };
+
+  const getStatusTag = (quantity: number) => {
+    if (quantity === 0) return <Tag color="red">Hết hàng</Tag>;
+    if (quantity <= 10) return <Tag color="orange">Sắp hết</Tag>;
+    return <Tag color="green">Còn hàng</Tag>;
+  };
+
+  const columns = [
     {
       title: 'STT',
-      dataIndex: 'id',
-      width: 200,
+      key: 'index',
+      width: 60,
+      render: (_: any, __: any, index: number) => index + 1,
     },
     {
       title: 'Tên sản phẩm',
       dataIndex: 'name',
-      width: 200,
-      render: (value, record) => {
-        console.log('value', value);
-        console.log('record', record);
-        return <b style={{ color: 'red' }}>{record.name}</b>;
-      },
+      key: 'name',
+      render: (text: string) => <b>{text}</b>,
+      sorter: (a: any, b: any) => a.name.localeCompare(b.name),
     },
     {
-      title: 'Giá sản phẩm',
+      title: 'Danh mục',
+      dataIndex: 'category',
+      key: 'category',
+      filters: CATEGORIES.map(c => ({ text: c, value: c })),
+      onFilter: (value: any, record: any) => record.category === value,
+    },
+    {
+      title: 'Giá',
       dataIndex: 'price',
-      width: 200,
+      key: 'price',
+      render: (price: number) => price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }),
+      sorter: (a: any, b: any) => a.price - b.price,
     },
     {
-      title: 'Số lượng sản phẩm',
+      title: 'Số lượng',
       dataIndex: 'quantity',
-      width: 200,
+      key: 'quantity',
+      sorter: (a: any, b: any) => a.quantity - b.quantity,
+    },
+    {
+      title: 'Trạng thái',
+      key: 'status',
+      render: (_: any, record: any) => getStatusTag(record.quantity),
     },
     {
       title: 'Thao tác',
-      width: 200,
-      align: 'center',
-      render: (value, record) => (
-        <>
+      key: 'action',
+      render: (_: any, record: any) => (
+        <Space>
+          <Button
+            type="primary"
+            ghost
+            icon={<EditOutlined />}
+            onClick={() => handleEdit(record)}
+          />
           <Popconfirm
-            title='Bạn có chắc chắn muốn xóa sản phẩm này không?'
-            onConfirm={() => {
-              const danhSachSanPhamMoi = danhSachSanPham.filter((item) => item.id !== record.id);
-              setDanhSachSanPham(danhSachSanPhamMoi);
-              // alert('Xóa sản phẩm thành công!');
-              message.info('Xóa sản phẩm thành công!');
-            }}
-            // onCancel={cancel}
-            okText='Có'
-            cancelText='Không'
+            title="Bạn có chắc muốn xóa?"
+            onConfirm={() => handleDelete(record.id)}
+            okText="Có"
+            cancelText="Không"
           >
-            <a href='#'>Xóa</a>
+            <Button danger icon={<DeleteOutlined />} />
           </Popconfirm>
-          <a
-            onClick={() => {
-              setOpen(true);
-              setSanPhamDangSua(record);
-              bienThamChieuForm.setFieldsValue(record);
-            }}
-            style={{ marginLeft: 8 }}
-            href='#'
-          >
-            Sửa
-          </a>
-        </>
+        </Space>
       ),
     },
   ];
 
   return (
-    <>
-      <h1>Quản lý sản phẩm</h1>
-      <Button
-        onClick={() => {
-          setOpen(true);
-        }}
-        style={{
-          marginBottom: 8,
-        }}
-        type='primary'
-        icon={<PlusOutlined />}
-      >
-        Thêm sản phẩm mới
-      </Button>
-      <Table columns={cot} dataSource={danhSachSanPham} />
+    <div style={{ padding: 24 }}>
+      <Card style={{ marginBottom: 16 }}>
+        <Row gutter={16}>
+          <Col span={12}>
+            <Statistic title="Tổng số sản phẩm" value={stats.totalProducts} />
+          </Col>
+          <Col span={12}>
+            <Statistic title="Tổng giá trị tồn kho" value={stats.totalStockValue} suffix="₫" groupSeparator="." />
+          </Col>
+        </Row>
+      </Card>
+
+      <Card title="Quản lý Sản phẩm" extra={
+        <Space>
+          <Button icon={<ReloadOutlined />} onClick={handleResetData}>
+            Khôi phục dữ liệu mẫu
+          </Button>
+          <Button
+            type="primary"
+            icon={<PlusOutlined />}
+            onClick={() => {
+              setIsEditing(false);
+              setEditingId(null);
+              form.resetFields();
+              setOpen(true);
+            }}
+          >
+            Thêm sản phẩm
+          </Button>
+        </Space>
+      }>
+        <div style={{ marginBottom: 16 }}>
+          <Row gutter={[16, 16]}>
+            <Col span={6}>
+              <Input.Search
+                placeholder="Tìm tên sản phẩm"
+                onSearch={val => setSearchText(val)}
+                onChange={e => setSearchText(e.target.value)}
+                allowClear
+              />
+            </Col>
+            <Col span={4}>
+              <Select
+                style={{ width: '100%' }}
+                placeholder="Danh mục"
+                allowClear
+                onChange={val => setFilterCategory(val)}
+                options={CATEGORIES.map(c => ({ label: c, value: c }))}
+              />
+            </Col>
+            <Col span={4}>
+              <Select
+                style={{ width: '100%' }}
+                placeholder="Trạng thái"
+                allowClear
+                onChange={val => setFilterStatus(val)}
+                options={[
+                  { label: 'Còn hàng', value: 'Còn hàng' },
+                  { label: 'Sắp hết', value: 'Sắp hết' },
+                  { label: 'Hết hàng', value: 'Hết hàng' },
+                ]}
+              />
+            </Col>
+            <Col span={6}>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <span style={{ marginRight: 8, whiteSpace: 'nowrap' }}>Giá:</span>
+                <Slider
+                  range
+                  min={0}
+                  max={100000000}
+                  step={1000000}
+                  value={priceRange}
+                  onChange={(val: [number, number]) => setPriceRange(val)}
+                  style={{ flex: 1 }}
+                />
+              </div>
+            </Col>
+          </Row>
+        </div>
+
+        <Table
+          columns={columns}
+          dataSource={filteredData}
+          rowKey="id"
+          pagination={{ pageSize: 5 }}
+        />
+      </Card>
+
       <Modal
-        footer={false}
-        title='Basic Modal'
+        title={isEditing ? "Cập nhật sản phẩm" : "Thêm sản phẩm mới"}
         visible={open}
-        //  onOk={handleOk}
-        onCancel={() => {
-          setOpen(false);
-        }}
+        onCancel={() => setOpen(false)}
+        footer={null}
       >
         <Form
-          form={bienThamChieuForm}
-          onFinish={(values) => {
-            setDanhSachSanPham([...danhSachSanPham, { ...values, id: danhSachSanPham.length + 1 }]);
-            setOpen(false);
-            message.success('Thêm sản phẩm thành công');
-          }}
-          name='basic'
-          labelCol={{ span: 8 }}
-          wrapperCol={{ span: 16 }}
-          autoComplete='off'
+          form={form}
+          layout="vertical"
+          onFinish={handleSave}
         >
           <Form.Item
-            initialValue={sanPhamDangSua.name}
-            label='Tên sản phẩm'
-            name='name'
-            rules={[{ required: true, message: 'Please input your username!' }]}
+            name="name"
+            label="Tên sản phẩm"
+            rules={[{ required: true, message: 'Vui lòng nhập tên sản phẩm' }]}
           >
             <Input />
           </Form.Item>
 
-          <Form.Item label='Giá' name='price' rules={[...rules.number(9999999999, 0)]}>
-            <InputNumber />
+          <Form.Item
+            name="category"
+            label="Danh mục"
+            rules={[{ required: true, message: 'Vui lòng chọn danh mục' }]}
+          >
+            <Select options={CATEGORIES.map(c => ({ label: c, value: c }))} />
           </Form.Item>
 
-          <Form.Item rules={[...rules.number(9999999999, 0, false)]} name='quantity' label='Số lượng'>
-            <InputNumber />
+          <Form.Item
+            name="price"
+            label="Giá"
+            rules={[{ required: true, message: 'Vui lòng nhập giá' }]}
+          >
+            <InputNumber style={{ width: '100%' }} formatter={value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} parser={value => value!.replace(/\$\s?|(,*)/g, '')} />
           </Form.Item>
 
-          <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-            <Button type='primary' htmlType='submit'>
-              Submit
+          <Form.Item
+            name="quantity"
+            label="Số lượng"
+            rules={[{ required: true, message: 'Vui lòng nhập số lượng' }]}
+          >
+            <InputNumber style={{ width: '100%' }} min={0} />
+          </Form.Item>
+
+          <Form.Item style={{ textAlign: 'right' }}>
+            <Button onClick={() => setOpen(false)} style={{ marginRight: 8 }}>
+              Hủy
+            </Button>
+            <Button type="primary" htmlType="submit">
+              {isEditing ? "Lưu thay đổi" : "Thêm mới"}
             </Button>
           </Form.Item>
         </Form>
       </Modal>
-    </>
+    </div>
   );
 };
+
 export default BaiTap01;
