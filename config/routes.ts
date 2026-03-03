@@ -54,6 +54,18 @@
 		icon: 'TableOutlined',
 		component: './QuanLyDonHang',
 	},
+	{
+		path: '/random-number',
+		name: 'RandomNumber',
+		icon: 'ArrowsAltOutlined',
+		component: './RandomNumber',
+	},
+	{
+		path: '/quan-ly-hoc-tap',
+		name: 'Quản lý học tập',
+		icon: 'TableOutlined',
+		component: './QuanLyHocTap',
+	},
 
 	// DANH MUC HE THONG
 	// {
