@@ -1,4 +1,6 @@
-﻿export default [
+﻿import path from "path";
+
+export default [
 	{
 		path: '/user',
 		layout: false,
@@ -55,16 +57,43 @@
 		component: './QuanLyDonHang',
 	},
 	{
-		path: '/random-number',
-		name: 'RandomNumber',
-		icon: 'ArrowsAltOutlined',
-		component: './RandomNumber',
+		name: 'Bài tập thực hành số 1',
+		path: '/bai-tap-1',
+		icon: 'AppstoreOutlined',
+		routes: [
+			{
+				path: '/bai-tap-1/random-number',
+				name: 'RandomNumber',
+				icon: 'ArrowsAltOutlined',
+				component: './RandomNumber',
+			},
+			{
+				path: '/bai-tap-1/quan-ly-hoc-tap',
+				name: 'Quản lý học tập',
+				icon: 'TableOutlined',
+				component: './QuanLyHocTap',
+			},
+		],
 	},
 	{
-		path: '/quan-ly-hoc-tap',
-		name: 'Quản lý học tập',
-		icon: 'TableOutlined',
-		component: './QuanLyHocTap',
+
+		name: 'Bài tập thực hành số 2',
+		path: '/bai-tap-2',
+		icon: 'AppstoreOutlined',
+		routes: [
+			{
+				path: '/bai-tap-2/RockPaperSiccor',
+				name: 'RockPaperSiccor',
+				icon: 'ArrowsAltOutlined',
+				component: './RockPaperSiccor',
+			},
+			{
+				path: '/bai-tap-2/QuanLyCauHoi',
+				name: 'Quản lý câu hỏi',
+				icon: 'TableOutlined',
+				component: './QuanLyCauHoi',
+			}
+		],
 	},
 
 	// DANH MUC HE THONG
