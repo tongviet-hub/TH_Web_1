@@ -95,7 +95,20 @@ export default [
 			}
 		],
 	},
+	{
 
+		name: 'Bài tập thực hành số 3',
+		path: '/bai-tap-3',
+		icon: 'AppstoreOutlined',
+		routes: [
+			{
+				path: '/bai-tap-3/khach-hang-dat-lich-hen',
+				name: 'Quản lý Lịch hẹn Dịch vụ',
+				icon: 'CalendarOutlined',
+				component: './Khachhangdatlichhen',
+			}
+		],
+	},
 	// DANH MUC HE THONG
 	// {
 	// 	name: 'DanhMuc',

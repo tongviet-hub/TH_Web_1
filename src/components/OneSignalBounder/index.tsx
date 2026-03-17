@@ -1,23 +1,32 @@
 import { initOneSignal } from '@/services/base/api';
 import { AppModules } from '@/services/base/constant';
 import { currentRole, oneSignalClient, oneSignalRole } from '@/utils/ip';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useAuth } from 'react-oidc-context';
 import OneSignal from 'react-onesignal';
 
+const ONE_SIGNAL_ALLOWED_ORIGIN = 'https://sinhvien.hvpnvn.edu.vn';
+
 const OneSignalBounder = (props: { children: React.ReactNode }) => {
 	const [oneSignalId, setOneSignalId] = useState<string | null | undefined>();
+	const isMountedRef = useRef(true);
 	const auth = useAuth();
 	const iframeSource = AppModules[oneSignalRole].url;
 	// let iframe: HTMLIFrameElement | null = null;
+	const isSupportedOneSignalOrigin =
+		typeof window !== 'undefined' &&
+		window.location.origin === ONE_SIGNAL_ALLOWED_ORIGIN &&
+		window.isSecureContext;
 
 	const getUserIdOnesignal = async () => {
-		if (!!oneSignalClient) {
+		if (!!oneSignalClient && isSupportedOneSignalOrigin) {
 			await OneSignal.init({
 				appId: oneSignalClient,
 			});
 			const id = await OneSignal.getUserId();
-			setOneSignalId(id);
+			if (isMountedRef.current) {
+				setOneSignalId(id);
+			}
 		}
 	};
 
@@ -66,6 +75,8 @@ const OneSignalBounder = (props: { children: React.ReactNode }) => {
 	};
 
 	useEffect(() => {
+		isMountedRef.current = true;
+
 		// Nếu đây là trang handle OneSignal
 		if (oneSignalRole.valueOf() === currentRole.valueOf()) getUserIdOnesignal();
 		else if (iframeSource) {
@@ -76,6 +87,10 @@ const OneSignalBounder = (props: { children: React.ReactNode }) => {
 			// iframe.style.display = 'none';
 			// document.body.appendChild(iframe);
 		}
+
+		return () => {
+			isMountedRef.current = false;
+		};
 	}, []);
 
 	/**
