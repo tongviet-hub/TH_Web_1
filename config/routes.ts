@@ -118,7 +118,7 @@ export default [
 				path: '/bai-tap-4/quan-ly-hen-dich-vu',
 				name: 'Quản lý Lịch hẹn Dịch vụ',
 				icon: 'CalendarOutlined',
-				component: './Khachhangdatlichhen/pages/TH04/DiplomaSystem',
+				component: './TH04/DiplomaSystem',
 			}
 		],
 	},
