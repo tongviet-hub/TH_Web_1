@@ -109,6 +109,19 @@ export default [
 			}
 		],
 	},
+	{
+		name: 'Bài tập thực hành số 4',
+		path: '/bai-tap-4',
+		icon: 'AppstoreOutlined',
+		routes: [
+			{
+				path: '/bai-tap-4/quan-ly-hen-dich-vu',
+				name: 'Quản lý Lịch hẹn Dịch vụ',
+				icon: 'CalendarOutlined',
+				component: './Khachhangdatlichhen/pages/TH04/DiplomaSystem',
+			}
+		],
+	},
 	// DANH MUC HE THONG
 	// {
 	// 	name: 'DanhMuc',

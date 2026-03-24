@@ -24,4 +24,7 @@ export default {
 	'menu.Bài tập thực hành số 3': 'Bài tập thực hành số 3',
 	'menu.Bài tập thực hành số 3.RockPaperScissors': 'Kéo búa bao',
 	'menu.Bài tập thực hành số 3.Quản lý Lịch hẹn Dịch vụ': 'Quản lý Lịch hẹn Dịch vụ',
+
+	'menu.Bài tập thực hành số 4': 'Bài tập thực hành số 4',
+	'menu.Bài tập thực hành số 4.Quản lý Lịch hẹn Dịch vụ': 'Quản lý Lịch hẹn Dịch vụ',
 };
