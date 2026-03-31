@@ -122,6 +122,37 @@ export default [
 			}
 		],
 	},
+{
+    name: 'Bài tập thực hành số 5',
+    path: '/bai-tap-5',
+    icon: 'AppstoreOutlined',
+    routes: [
+        {
+            path: '/bai-tap-5/danh-sach-clb',
+            name: 'Danh sách câu lạc bộ',
+            icon: 'TableOutlined',
+            component: './TH05/DanhSachCLB',
+        },
+        {
+            path: '/bai-tap-5/quan-ly-don',
+            name: 'Quản lý đơn đăng ký',
+            icon: 'FileDoneOutlined',
+            component: './TH05/QuanLyDonDangKy',
+        },
+        {
+            path: '/bai-tap-5/quan-ly-thanh-vien',
+            name: 'Quản lý thành viên',
+            icon: 'UsergroupAddOutlined',
+            component: './TH05/QuanLyThanhVien',
+        },
+        {
+            path: '/bai-tap-5/bao-cao-thong-ke',
+            name: 'Báo cáo và thống kê',
+            icon: 'BarChartOutlined',
+            component: './TH05/BaoCaoThongKe',
+        }
+    ],
+},
 	// DANH MUC HE THONG
 	// {
 	// 	name: 'DanhMuc',
