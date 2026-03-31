@@ -155,7 +155,7 @@ const QuanLyHoSoDonDangKy = () => {
           disabled={mangIdDangChon.length === 0}
           onClick={() => setShowModalTuChoi(true)}
         >
-          Trảm đồng loạt ({mangIdDangChon.length} item)
+          Loại đồng loạt ({mangIdDangChon.length} item)
         </Button>
       </Space>
 
