@@ -27,4 +27,16 @@ export default {
 
 	'menu.Bài tập thực hành số 4': 'Bài tập thực hành số 4',
 	'menu.Bài tập thực hành số 4.Quản lý Lịch hẹn Dịch vụ': 'Quản lý Lịch hẹn Dịch vụ',
+
+	'menu.Bài tập thực hành số 5': 'Bài tập thực hành số 5',
+	'menu.Bài tập thực hành số 5.Danh sách câu lạc bộ': 'Danh sách câu lạc bộ',
+	'menu.Bài tập thực hành số 5.Quản lý đơn đăng ký': 'Quản lý đơn đăng ký',
+	'menu.Bài tập thực hành số 5.Quản lý thành viên': 'Quản lý thành viên',
+	'menu.Bài tập thực hành số 5.Báo cáo và thống kê': 'Báo cáo và thống kê',
+
+	'menu.Bài tập thực hành số 6 (Travel Planner)': 'Bài tập thực hành số 6 (Travel Planner)',
+	'menu.Bài tập thực hành số 6 (Travel Planner).Khám phá điểm đến': 'Khám phá điểm đến',
+	'menu.Bài tập thực hành số 6 (Travel Planner).Tạo lịch trình': 'Tạo lịch trình',
+	'menu.Bài tập thực hành số 6 (Travel Planner).Quản lý ngân sách': 'Quản lý ngân sách',
+	'menu.Bài tập thực hành số 6 (Travel Planner).Trang quản trị (Admin)': 'Trang quản trị (Admin)',
 };

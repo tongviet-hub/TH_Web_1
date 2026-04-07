@@ -101,7 +101,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
 		menuItemRender: (item: any, dom: any) => (
 			<a
 				className='not-underline'
-				key={item?.path}
+				key={item?.path || item?.name || Math.random().toString()}
 				href={item?.path}
 				onClick={(e) => {
 					e.preventDefault();

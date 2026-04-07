@@ -1,4 +1,4 @@
-﻿import path from "path";
+import path from "path";
 
 export default [
 	{
@@ -122,37 +122,68 @@ export default [
 			}
 		],
 	},
-{
-    name: 'Bài tập thực hành số 5',
-    path: '/bai-tap-5',
-    icon: 'AppstoreOutlined',
-    routes: [
-        {
-            path: '/bai-tap-5/danh-sach-clb',
-            name: 'Danh sách câu lạc bộ',
-            icon: 'TableOutlined',
-            component: './TH05/DanhSachCLB',
-        },
-        {
-            path: '/bai-tap-5/quan-ly-don',
-            name: 'Quản lý đơn đăng ký',
-            icon: 'FileDoneOutlined',
-            component: './TH05/QuanLyDonDangKy',
-        },
-        {
-            path: '/bai-tap-5/quan-ly-thanh-vien',
-            name: 'Quản lý thành viên',
-            icon: 'UsergroupAddOutlined',
-            component: './TH05/QuanLyThanhVien',
-        },
-        {
-            path: '/bai-tap-5/bao-cao-thong-ke',
-            name: 'Báo cáo và thống kê',
-            icon: 'BarChartOutlined',
-            component: './TH05/BaoCaoThongKe',
-        }
-    ],
-},
+	{
+		name: 'Bài tập thực hành số 5',
+		path: '/bai-tap-5',
+		icon: 'AppstoreOutlined',
+		routes: [
+			{
+				path: '/bai-tap-5/danh-sach-clb',
+				name: 'Danh sách câu lạc bộ',
+				icon: 'TableOutlined',
+				component: './TH05/DanhSachCLB',
+			},
+			{
+				path: '/bai-tap-5/quan-ly-don',
+				name: 'Quản lý đơn đăng ký',
+				icon: 'FileDoneOutlined',
+				component: './TH05/QuanLyDonDangKy',
+			},
+			{
+				path: '/bai-tap-5/quan-ly-thanh-vien',
+				name: 'Quản lý thành viên',
+				icon: 'UsergroupAddOutlined',
+				component: './TH05/QuanLyThanhVien',
+			},
+			{
+				path: '/bai-tap-5/bao-cao-thong-ke',
+				name: 'Báo cáo và thống kê',
+				icon: 'BarChartOutlined',
+				component: './TH05/BaoCaoThongKe',
+			}
+		],
+	},
+	{
+		name: 'Bài tập thực hành số 6 (Travel Planner)',
+		path: '/bai-tap-6',
+		icon: 'CompassOutlined',
+		routes: [
+			{
+				path: '/bai-tap-6/kham-pha',
+				name: 'Khám phá điểm đến',
+				icon: 'EnvironmentOutlined',
+				component: './TH06/KhamPha',
+			},
+			{
+				path: '/bai-tap-6/lich-trinh',
+				name: 'Tạo lịch trình',
+				icon: 'CalendarOutlined',
+				component: './TH06/LichTrinh',
+			},
+			{
+				path: '/bai-tap-6/ngan-sach',
+				name: 'Quản lý ngân sách',
+				icon: 'PieChartOutlined',
+				component: './TH06/NganSach',
+			},
+			{
+				path: '/bai-tap-6/admin',
+				name: 'Trang quản trị (Admin)',
+				icon: 'SettingOutlined',
+				component: './TH06/Admin',
+			}
+		],
+	},
 	// DANH MUC HE THONG
 	// {
 	// 	name: 'DanhMuc',
@@ -191,6 +222,7 @@ export default [
 	},
 	{
 		path: '/',
+		hideInMenu: true,
 	},
 	{
 		path: '/403',
@@ -204,5 +236,6 @@ export default [
 	},
 	{
 		component: './exception/404',
+		hideInMenu: true,
 	},
 ];
