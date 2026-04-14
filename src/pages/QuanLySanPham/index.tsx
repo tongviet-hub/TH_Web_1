@@ -238,6 +238,8 @@ const BaiTap01 = () => {
         visible={open}
         onCancel={() => setOpen(false)}
         footer={null}
+        bodyStyle={{ borderRadius: 8, padding: 20 }}
+        style={{ borderRadius: 8, overflow: 'hidden' }}
       >
         <Form
           form={form}
@@ -249,7 +251,7 @@ const BaiTap01 = () => {
             label="Tên sản phẩm"
             rules={[{ required: true, message: 'Vui lòng nhập tên sản phẩm' }]}
           >
-            <Input />
+            <Input style={{ borderRadius: 6 }} />
           </Form.Item>
 
           <Form.Item
@@ -257,7 +259,7 @@ const BaiTap01 = () => {
             label="Danh mục"
             rules={[{ required: true, message: 'Vui lòng chọn danh mục' }]}
           >
-            <Select options={CATEGORIES.map(c => ({ label: c, value: c }))} />
+            <Select options={CATEGORIES.map(c => ({ label: c, value: c }))} style={{ borderRadius: 6 }} />
           </Form.Item>
 
           <Form.Item
@@ -265,7 +267,7 @@ const BaiTap01 = () => {
             label="Giá"
             rules={[{ required: true, message: 'Vui lòng nhập giá' }]}
           >
-            <InputNumber style={{ width: '100%' }} formatter={value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} parser={value => value!.replace(/\$\s?|(,*)/g, '')} />
+            <InputNumber style={{ width: '100%', borderRadius: 6 }} formatter={value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} parser={value => value!.replace(/\$\s?|(,*)/g, '')} />
           </Form.Item>
 
           <Form.Item
@@ -273,14 +275,14 @@ const BaiTap01 = () => {
             label="Số lượng"
             rules={[{ required: true, message: 'Vui lòng nhập số lượng' }]}
           >
-            <InputNumber style={{ width: '100%' }} min={0} />
+            <InputNumber style={{ width: '100%', borderRadius: 6 }} min={0} />
           </Form.Item>
 
           <Form.Item style={{ textAlign: 'right' }}>
-            <Button onClick={() => setOpen(false)} style={{ marginRight: 8 }}>
+            <Button onClick={() => setOpen(false)} style={{ marginRight: 8, borderRadius: 6 }}>
               Hủy
             </Button>
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" htmlType="submit" style={{ borderRadius: 6 }}>
               {isEditing ? "Lưu thay đổi" : "Thêm mới"}
             </Button>
           </Form.Item>

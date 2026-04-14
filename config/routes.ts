@@ -1,4 +1,4 @@
-import path from "path";
+﻿
 
 export default [
 	{
@@ -153,6 +153,7 @@ export default [
 			}
 		],
 	},
+
 	{
 		name: 'Bài tập thực hành số 6 (Travel Planner)',
 		path: '/bai-tap-6',
@@ -182,6 +183,19 @@ export default [
 				icon: 'SettingOutlined',
 				component: './TH06/Admin',
 			}
+		],
+	},
+	{
+		name: 'Bài tập kiểm tra giữa kỳ',
+		path: '/bai-kiem-tra-giua-ky',
+		icon: 'AppstoreOutlined',
+		routes: [
+			{
+				path: '/bai-kiem-tra-giua-ky/quan-ly-khoa-hoc',
+				name: 'Quản lý khóa học',
+				icon: 'TableOutlined',
+				component: './KTGK/DanhSachKhoaHoc',
+			},
 		],
 	},
 	// DANH MUC HE THONG
