@@ -39,5 +39,6 @@ export default {
 	'menu.Bài tập thực hành số 6 (Travel Planner).Tạo lịch trình': 'Tạo lịch trình',
 	'menu.Bài tập thực hành số 6 (Travel Planner).Quản lý ngân sách': 'Quản lý ngân sách',
 	'menu.Bài tập thực hành số 6 (Travel Planner).Trang quản trị (Admin)': 'Trang quản trị (Admin)',
+	'menu.Bài tập kiểm tra giữa kỳ': 'Bài tập kiểm tra giữa kỳ',
     'menu.Bài tập kiểm tra giữa kỳ.Quản lý khóa học': 'Quản lý khóa học',
 };

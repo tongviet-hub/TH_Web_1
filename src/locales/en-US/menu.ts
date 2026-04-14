@@ -27,6 +27,6 @@ export default {
 
   'menu.Bài tập thực hành số 4': 'Bài tập thực hành số 4',
   'menu.Bài tập thực hành số 4.Quản lý Lịch hẹn Dịch vụ': 'Quản lý Lịch hẹn Dịch vụ',
-  
+  'menu.Bài tập kiểm tra giữa kỳ': 'Bài tập kiểm tra giữa kỳ',
   'menu.Bài tập kiểm tra giữa kỳ.Quản lý khóa học': 'Course Management',
 };
