@@ -98,20 +98,23 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
 			}
 		},
 
-		menuItemRender: (item: any, dom: any) => (
-			<a
-				className='not-underline'
-				key={item?.path || item?.name || Math.random().toString()}
-				href={item?.path}
-				onClick={(e) => {
-					e.preventDefault();
-					history.push(item?.path ?? '/');
-				}}
-				style={{ display: 'block' }}
-			>
-				{dom}
-			</a>
-		),
+		menuItemRender: (item: any, dom: any) => {
+			const itemKey = item?.path || item?.name || `menu-item-${item?.name}`;
+			return (
+				<a
+					className='not-underline'
+					key={itemKey}
+					href={item?.path}
+					onClick={(e) => {
+						e.preventDefault();
+						history.push(item?.path ?? '/');
+					}}
+					style={{ display: 'block' }}
+				>
+					{dom}
+				</a>
+			);
+		},
 
 		childrenRender: (dom) => (
 			<OIDCBounder>
@@ -123,6 +126,9 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
 			</OIDCBounder>
 		),
 		menuHeaderRender: undefined,
+		menu: {
+			type: 'group',
+		},
 		...initialState?.settings,
 	};
 };

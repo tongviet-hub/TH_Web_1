@@ -27,6 +27,26 @@ export default {
 
   'menu.Bài tập thực hành số 4': 'Bài tập thực hành số 4',
   'menu.Bài tập thực hành số 4.Quản lý Lịch hẹn Dịch vụ': 'Quản lý Lịch hẹn Dịch vụ',
+
+  'menu.Bài tập thực hành số 5': 'Bài tập thực hành số 5',
+  'menu.Bài tập thực hành số 5.Danh sách câu lạc bộ': 'Club List',
+  'menu.Bài tập thực hành số 5.Quản lý đơn đăng ký': 'Registration Management',
+  'menu.Bài tập thực hành số 5.Quản lý thành viên': 'Member Management',
+  'menu.Bài tập thực hành số 5.Báo cáo và thống kê': 'Reports and Statistics',
+
+  'menu.Bài tập thực hành số 6 (Travel Planner)': 'Bài tập thực hành số 6 (Travel Planner)',
+  'menu.Bài tập thực hành số 6 (Travel Planner).Khám phá điểm đến': 'Explore Destinations',
+  'menu.Bài tập thực hành số 6 (Travel Planner).Tạo lịch trình': 'Create Itinerary',
+  'menu.Bài tập thực hành số 6 (Travel Planner).Quản lý ngân sách': 'Budget Management',
+  'menu.Bài tập thực hành số 6 (Travel Planner).Trang quản trị (Admin)': 'Admin Panel',
+
   'menu.Bài tập kiểm tra giữa kỳ': 'Bài tập kiểm tra giữa kỳ',
   'menu.Bài tập kiểm tra giữa kỳ.Quản lý khóa học': 'Course Management',
+  'menu.Bài tập thực hành số 7 (Blog)': 'Exercise 7 (Blog)',
+  'menu.Bài tập thực hành số 7 (Blog).Trang chủ Blog': 'Blog Home',
+  'menu.Bài tập thực hành số 7 (Blog).Chi tiết bài viết': 'Post Detail',
+  'menu.Bài tập thực hành số 7 (Blog).Giới thiệu': 'About',
+  'menu.Bài tập thực hành số 7 (Blog).Quản lý': 'Management',
+  'menu.Bài tập thực hành số 7 (Blog).Quản lý.Quản lý bài viết': 'Post Management',
+  'menu.Bài tập thực hành số 7 (Blog).Quản lý.Quản lý thẻ (Tag)': 'Tag Management',
 };

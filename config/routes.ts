@@ -1,4 +1,4 @@
-﻿
+
 
 export default [
 	{
@@ -195,6 +195,50 @@ export default [
 				name: 'Quản lý khóa học',
 				icon: 'TableOutlined',
 				component: './KTGK/DanhSachKhoaHoc',
+			},
+		],
+	},
+	{
+		name: 'Bài tập thực hành số 7 (Blog)',
+		path: '/TH07',
+		icon: 'ReadOutlined',
+		routes: [
+			{
+				path: '/TH07/home',
+				name: 'Trang chủ Blog',
+				icon: 'HomeOutlined',
+				component: './TH07/Home',
+			},
+			{
+				path: '/TH07/post/:id',
+				name: 'Chi tiết bài viết',
+				hideInMenu: true,
+				component: './TH07/PostDetail',
+			},
+			{
+				path: '/TH07/about',
+				name: 'Giới thiệu',
+				icon: 'UserOutlined',
+				component: './TH07/About',
+			},
+			{
+				path: '/TH07/admin',
+				name: 'Quản lý',
+				icon: 'SettingOutlined',
+				routes: [
+					{
+						path: '/TH07/admin/posts',
+						name: 'Quản lý bài viết',
+						icon: 'FileTextOutlined',
+						component: './TH07/AdminPosts',
+					},
+					{
+						path: '/TH07/admin/tags',
+						name: 'Quản lý thẻ (Tag)',
+						icon: 'TagsOutlined',
+						component: './TH07/AdminTags',
+					},
+				],
 			},
 		],
 	},
