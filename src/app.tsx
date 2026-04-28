@@ -99,15 +99,15 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
 		},
 
 		menuItemRender: (item: any, dom: any) => {
-			const itemKey = item?.path || item?.name || `menu-item-${item?.name}`;
+			if (!item?.path) return dom;
 			return (
 				<a
 					className='not-underline'
-					key={itemKey}
-					href={item?.path}
+					key={item.path}
+					href={item.path}
 					onClick={(e) => {
 						e.preventDefault();
-						history.push(item?.path ?? '/');
+						history.push(item.path);
 					}}
 					style={{ display: 'block' }}
 				>
@@ -126,9 +126,6 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
 			</OIDCBounder>
 		),
 		menuHeaderRender: undefined,
-		menu: {
-			type: 'group',
-		},
 		...initialState?.settings,
 	};
 };

@@ -242,6 +242,43 @@ export default [
 			},
 		],
 	},
+	{
+		name: 'Bài tập thực hành số 8 (Fitness Tracker)',
+		path: '/TH08',
+		icon: 'HeartOutlined',
+		routes: [
+			{
+				path: '/TH08/dashboard',
+				name: 'Dashboard',
+				icon: 'DashboardOutlined',
+				component: './TH08/Dashboard',
+			},
+			{
+				path: '/TH08/workouts',
+				name: 'Nhật ký tập luyện',
+				icon: 'ThunderboltOutlined',
+				component: './TH08/Workouts',
+			},
+			{
+				path: '/TH08/health',
+				name: 'Nhật ký chỉ số sức khỏe',
+				icon: 'HeartOutlined',
+				component: './TH08/HealthLogs',
+			},
+			{
+				path: '/TH08/goals',
+				name: 'Quản lý mục tiêu',
+				icon: 'FlagOutlined',
+				component: './TH08/Goals',
+			},
+			{
+				path: '/TH08/exercises',
+				name: 'Thư viện bài tập',
+				icon: 'BookOutlined',
+				component: './TH08/Exercises',
+			},
+		],
+	},
 	// DANH MUC HE THONG
 	// {
 	// 	name: 'DanhMuc',
@@ -260,17 +297,17 @@ export default [
 		path: '/notification',
 		routes: [
 			{
-				path: './subscribe',
+				path: '/notification/subscribe',
 				exact: true,
 				component: './ThongBao/Subscribe',
 			},
 			{
-				path: './check',
+				path: '/notification/check',
 				exact: true,
 				component: './ThongBao/Check',
 			},
 			{
-				path: './',
+				path: '/notification',
 				exact: true,
 				component: './ThongBao/NotifOneSignal',
 			},
@@ -280,6 +317,7 @@ export default [
 	},
 	{
 		path: '/',
+		redirect: '/dashboard',
 		hideInMenu: true,
 	},
 	{
@@ -293,7 +331,10 @@ export default [
 		layout: false,
 	},
 	{
+		path: '*',
 		component: './exception/404',
 		hideInMenu: true,
 	},
 ];
+
+

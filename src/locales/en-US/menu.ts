@@ -49,4 +49,10 @@ export default {
   'menu.Bài tập thực hành số 7 (Blog).Quản lý': 'Management',
   'menu.Bài tập thực hành số 7 (Blog).Quản lý.Quản lý bài viết': 'Post Management',
   'menu.Bài tập thực hành số 7 (Blog).Quản lý.Quản lý thẻ (Tag)': 'Tag Management',
+  'menu.Bài tập thực hành số 8 (Fitness Tracker)': 'Exercise 8 (Fitness Tracker)',
+  'menu.Bài tập thực hành số 8 (Fitness Tracker).Dashboard': 'Dashboard',
+  'menu.Bài tập thực hành số 8 (Fitness Tracker).Nhật ký tập luyện': 'Workout Log',
+  'menu.Bài tập thực hành số 8 (Fitness Tracker).Nhật ký chỉ số sức khỏe': 'Health Metrics Log',
+  'menu.Bài tập thực hành số 8 (Fitness Tracker).Quản lý mục tiêu': 'Goal Management',
+  'menu.Bài tập thực hành số 8 (Fitness Tracker).Thư viện bài tập': 'Exercise Library',
 };

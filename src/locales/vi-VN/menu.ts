@@ -49,4 +49,10 @@ export default {
 	'menu.Bài tập thực hành số 7 (Blog).Quản lý': 'Quản lý',
 	'menu.Bài tập thực hành số 7 (Blog).Quản lý.Quản lý bài viết': 'Quản lý bài viết',
 	'menu.Bài tập thực hành số 7 (Blog).Quản lý.Quản lý thẻ (Tag)': 'Quản lý thẻ (Tag)',
+	'menu.Bài tập thực hành số 8 (Fitness Tracker)': 'Bài tập thực hành số 8 (Fitness Tracker)',
+	'menu.Bài tập thực hành số 8 (Fitness Tracker).Dashboard': 'Dashboard',
+	'menu.Bài tập thực hành số 8 (Fitness Tracker).Nhật ký tập luyện': 'Nhật ký tập luyện',
+	'menu.Bài tập thực hành số 8 (Fitness Tracker).Nhật ký chỉ số sức khỏe': 'Nhật ký chỉ số sức khỏe',
+	'menu.Bài tập thực hành số 8 (Fitness Tracker).Quản lý mục tiêu': 'Quản lý mục tiêu',
+	'menu.Bài tập thực hành số 8 (Fitness Tracker).Thư viện bài tập': 'Thư viện bài tập',
 };

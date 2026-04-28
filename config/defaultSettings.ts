@@ -9,7 +9,7 @@ const Settings: LayoutSettings & {
 	navTheme: 'light',
 	primaryColor: process.env.APP_CONFIG_PRIMARY_COLOR,
 	borderRadiusBase: '2px',
-	layout: 'side',
+	layout: 'mix',
 	contentWidth: 'Fluid',
 	fixedHeader: false,
 	fixSiderbar: true,
