@@ -279,6 +279,31 @@ export default [
 			},
 		],
 	},
+	{
+		name: 'Bài tập thực hành số 9 (Kanban Task)',
+		path: '/TH09',
+		icon: 'ProjectOutlined',
+		routes: [
+			{
+				path: '/TH09/dashboard',
+				name: 'Dashboard',
+				icon: 'DashboardOutlined',
+				component: './TH09/Dashboard',
+			},
+			{
+				path: '/TH09/kanban',
+				name: 'Kanban Board',
+				icon: 'AppstoreOutlined',
+				component: './TH09/KanbanBoard',
+			},
+			{
+				path: '/TH09/tasks',
+				name: 'Danh sách task',
+				icon: 'TableOutlined',
+				component: './TH09/TaskList',
+			},
+		],
+	},
 	// DANH MUC HE THONG
 	// {
 	// 	name: 'DanhMuc',

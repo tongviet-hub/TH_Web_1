@@ -55,4 +55,8 @@ export default {
 	'menu.Bài tập thực hành số 8 (Fitness Tracker).Nhật ký chỉ số sức khỏe': 'Nhật ký chỉ số sức khỏe',
 	'menu.Bài tập thực hành số 8 (Fitness Tracker).Quản lý mục tiêu': 'Quản lý mục tiêu',
 	'menu.Bài tập thực hành số 8 (Fitness Tracker).Thư viện bài tập': 'Thư viện bài tập',
+	'menu.Bài tập thực hành số 9 (Kanban Task)': 'Bài tập thực hành số 9 (Kanban Task)',
+	'menu.Bài tập thực hành số 9 (Kanban Task).Dashboard': 'Dashboard',
+	'menu.Bài tập thực hành số 9 (Kanban Task).Kanban Board': 'Kanban Board',
+	'menu.Bài tập thực hành số 9 (Kanban Task).Danh sách task': 'Danh sách task',
 };
